@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendamentoTransporte", "AgendamentoTransporte\AgendamentoTransporte.csproj", "{7E2ACA82-55FA-4D97-95FC-CC10F828974B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{71F2D9BB-52E3-474B-80C4-14034BAA3B1E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E2ACA82-55FA-4D97-95FC-CC10F828974B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E2ACA82-55FA-4D97-95FC-CC10F828974B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E2ACA82-55FA-4D97-95FC-CC10F828974B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E2ACA82-55FA-4D97-95FC-CC10F828974B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,231 @@
+﻿@model IEnumerable<AgendamentoTransporte.Models.Agendamento>
+@{
+    ViewData["Title"] = "Visualizar Agendamentos";
+    var tipoUsuario = ViewBag.TipoUsuario?.ToString();
+
+    TempData.Keep();
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        height: 100%;
+        width: 100%;
+    }
+
+    .tela-cheia {
+        padding: 50px;
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    .titulo {
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #0d6efd;
+    }
+
+    .filtros {
+        margin-bottom: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: flex-end;
+        justify-content: center;
+    }
+
+        .filtros div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filtros label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .filtros input,
+        .filtros select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            min-width: 180px;
+        }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+    thead {
+        background-color: #0d6efd;
+        color: white;
+        text-align: center;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    @@media print {
+        body *
+
+    {
+        visibility: hidden;
+    }
+
+    .table-responsive, .table-responsive * {
+        visibility: visible;
+    }
+
+    .table-responsive {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+        .table-responsive table {
+            width: 100% !important;
+            font-size: 12px;
+        }
+
+    thead {
+        background-color: #ddd !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .btn, .filtros, h2, .titulo, a[href*="ExportarExcel"] {
+        display: none !important;
+    }
+
+    }
+</style>
+
+<a href="@Url.Action("Index", "Menu")" class="btn btn-secondary mt-3">← Voltar ao Menu</a>
+
+<div class="tela-cheia">
+    <h2 class="titulo">Lista de Agendamentos</h2>
+    <p class="text-center text-muted">Usuário atual: <strong>@tipoUsuario</strong></p>
+
+
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        <a class="btn btn-success" asp-action="ExportarExcel">📤 Exportar para Excel</a>
+        <button onclick="window.print()" class="btn btn-outline-primary">🖨️ Imprimir Tabela</button>
+    </div>
+
+    <form method="get" class="filtros">
+        <div>
+            <label for="data">Filtrar por Data:</label>
+            <input type="date" name="data" class="form-control" value="@ViewData["Data"]" />
+        </div>
+        <div>
+            <label for="hora">Filtrar por Hora:</label>
+            <input type="time" name="hora" class="form-control" value="@ViewData["Hora"]" />
+        </div>
+        <div>
+            <label for="local">Filtrar por Local:</label>
+            <select name="local" class="form-control">
+                <option value="">Todos os Locais</option>
+                @foreach (var local in Model.Select(a => a.LocalConsulta).Distinct().OrderBy(l => l))
+                {
+                    var selecionado = ViewData["Local"]?.ToString() == local ? "selected" : "";
+                    @Html.Raw($"<option value='{local}' {selecionado}>{local}</option>")
+                }
+                @foreach (var outro in Model.Where(a => !string.IsNullOrEmpty(a.LocalConsultaOutro))
+                .Select(a => a.LocalConsultaOutro)
+                .Distinct()
+                .OrderBy(l => l))
+                {
+                    var selecionadoOutro = ViewData["Local"]?.ToString() == outro ? "selected" : "";
+                    @Html.Raw($"<option value='{outro}' {selecionadoOutro}>{outro} (Outro)</option>")
+                }
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary mt-4">Filtrar</button>
+        </div>
+        <div>
+            <a href="@Url.Action("Visualizar", "Agendamento")" class="btn btn-outline-danger mt-4">Limpar Filtros</a>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Telefone</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Local da Consulta</th>
+                    <th>Acompanhante</th>
+                    <th>Local para Buscar</th>
+                    <th>Ponto de Referência</th>
+                    <th>Motivo</th>
+                    <th>Observação</th>
+                    <th>Responsável</th>
+                    @if (tipoUsuario == "Administrador")
+                    {
+                        <th>Ações</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NomePaciente</td>
+                        <td>@item.Telefone</td>
+                        <td>@item.Data.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Hora</td>
+                        <td>@(string.IsNullOrEmpty(item.LocalConsultaOutro) ? item.LocalConsulta : $"{item.LocalConsulta} ({item.LocalConsultaOutro})")</td>
+                        <td>@item.PrecisaAcompanhante</td>
+                        <td>@(string.IsNullOrEmpty(item.LocalBuscaOutro) ? item.LocalBusca : $"{item.LocalBusca} ({item.LocalBuscaOutro})")</td>
+                        <td>@item.PontoReferencia</td>
+                        <td>@item.MotivoViagem</td>
+                        <td>@item.Observacao</td>
+                        <td>@item.UsuarioResponsavel</td>
+                        @if (tipoUsuario == "Administrador")
+                        {
+                            <td>
+                                <a href="@Url.Action("Editar", "Agendamento", new { id = item.Id })" class="btn btn-sm btn-warning me-1">Editar</a>
+                                <form method="post" asp-action="CancelarConfirmado" asp-route-id="@item.Id" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja cancelar este agendamento?');">Cancelar</button>
+                                </form>
+
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

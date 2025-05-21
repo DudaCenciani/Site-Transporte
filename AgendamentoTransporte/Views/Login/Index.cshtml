@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden; /* REMOVE a rolagem */
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 60px; /* AFASTAMENTO DO TOPO */
+    }
+
+    .logo {
+        max-width: 220px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .login-box {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    label {
+        font-size: 18px;
+        display: block;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f0f4ff;
+    }
+
+    input[type="submit"] {
+        background-color: #0CC0DF;
+        color: white;
+        font-size: 18px;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #089bb3;
+        }
+
+    .erro-msg {
+        color: red;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="login-container">
+    <img src="~/images/logo-2.png" alt="Prefeitura de Pedra Bela" class="logo" />
+    <div class="login-box">
+        <h2>Login</h2>
+
+        @if (ViewBag.Erro != null)
+        {
+            <div class="erro-msg">
+                @ViewBag.Erro
+            </div>
+        }
+
+        <form asp-action="Index" method="post">
+            <label for="usuario">Usuário:</label>
+            <input type="text" name="usuario" required />
+
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" required />
+
+            <input type="submit" value="Entrar" />
+        </form>
+    </div>
+</div>

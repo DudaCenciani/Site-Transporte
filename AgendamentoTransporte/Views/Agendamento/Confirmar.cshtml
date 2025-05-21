@@ -1,0 +1,92 @@
+﻿@model AgendamentoTransporte.Models.Agendamento
+@{
+    ViewData["Title"] = "Agendamento Confirmado";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .confirmacao-container {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .confirmacao-container h2 {
+            color: #198754;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .confirmacao-container p {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+    .btn-print {
+        display: block;
+        margin: 30px auto 0;
+    }
+
+    @@media print {
+        body *
+
+    {
+        visibility: hidden;
+    }
+
+    #confirmacao-imprimir, #confirmacao-imprimir * {
+        visibility: visible;
+    }
+
+    #confirmacao-imprimir {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    .btn-print, .btn-voltar {
+        display: none !important;
+    }
+
+    }
+</style>
+
+<script>
+    function imprimirConfirmacao() {
+        window.print();
+    }
+</script>
+
+<div class="confirmacao-container">
+    <div id="confirmacao-imprimir">
+        <h2>Agendamento Confirmado ✅</h2>
+
+        <p><strong>Nome do Paciente:</strong> @Model.NomePaciente</p>
+        <p><strong>Telefone:</strong> @Model.Telefone</p>
+        <p><strong>Data:</strong> @Model.Data.ToString("dd/MM/yyyy")</p>
+        <p><strong>Hora:</strong> @Model.Hora</p>
+        <p><strong>Local da Consulta:</strong> @Model.LocalConsulta @(string.IsNullOrWhiteSpace(Model.LocalConsultaOutro) ? "" : $"({Model.LocalConsultaOutro})")</p>
+        <p><strong>Precisa de Acompanhante:</strong> @Model.PrecisaAcompanhante</p>
+        <p><strong>Local para Buscar:</strong> @Model.LocalBusca @(string.IsNullOrWhiteSpace(Model.LocalBuscaOutro) ? "" : $"({Model.LocalBuscaOutro})")</p>
+        <p><strong>Ponto de Referência:</strong> @Model.PontoReferencia</p>
+        <p><strong>Motivo da Viagem:</strong> @Model.MotivoViagem</p>
+        <p><strong>Observação:</strong> @Model.Observacao</p>
+        <p><strong>Agendado por:</strong> @Model.UsuarioResponsavel</p>
+    </div>
+
+    <button onclick="imprimirConfirmacao()" class="btn btn-outline-primary btn-print">🖨️ Imprimir Confirmação</button>
+
+    <div class="btn-voltar">
+        <a href="@Url.Action("Index", "Menu")">← Voltar ao Menu</a>
+    </div>
+</div>
