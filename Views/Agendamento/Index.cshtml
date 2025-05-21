@@ -1,0 +1,165 @@
+﻿@model AgendamentoTransporte.Models.Agendamento
+
+@{
+    ViewData["Title"] = "Agendar Transporte";
+    var locaisConsulta = ViewBag.LocaisConsulta as List<string>;
+    var locaisBusca = ViewBag.LocaisBusca as List<string>;
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .tela-cheia {
+        max-width: 100%;
+        padding: 40px;
+    }
+
+    .formulario {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+        .formulario h2 {
+            text-align: center;
+            color: #0d6efd;
+            margin-bottom: 25px;
+        }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    button {
+        margin-top: 25px;
+        width: 100%;
+        padding: 16px;
+        font-size: 18px;
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0b5ed7;
+        }
+
+    .field-validation-error {
+        color: red;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+</style>
+<a href="@Url.Action("Index", "Menu")" class="btn btn-secondary mt-3">← Voltar ao Menu</a>
+
+
+<div class="tela-cheia">
+    <div class="formulario">
+        <h2>Agendar Transporte</h2>
+
+        <form asp-action="Agendar" method="post">
+
+
+            <label>Nome do Paciente:</label>
+            <input asp-for="NomePaciente" />
+            <span asp-validation-for="NomePaciente" class="field-validation-error"></span>
+
+            <label>Telefone:</label>
+            <input asp-for="Telefone" type="tel" />
+            <span asp-validation-for="Telefone" class="field-validation-error"></span>
+
+            <label>Data da Viagem:</label>
+            <input asp-for="Data" type="date" />
+            <span asp-validation-for="Data" class="field-validation-error"></span>
+
+            <label>Hora:</label>
+            <input asp-for="Hora" type="time" />
+            <span asp-validation-for="Hora" class="field-validation-error"></span>
+
+            <label>Local da Consulta:</label>
+            <select asp-for="LocalConsulta" id="localConsultaSelect">
+                @foreach (var local in locaisConsulta)
+                {
+                    <option value="@local">@local</option>
+                }
+            </select>
+            <input asp-for="LocalConsultaOutro" id="localConsultaOutro" placeholder="Digite o local" style="display:none; margin-top:10px;" />
+            <span asp-validation-for="LocalConsultaOutro" class="field-validation-error"></span>
+
+            <label>Precisa de Acompanhante?</label>
+            <select asp-for="PrecisaAcompanhante">
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+            </select>
+            <span asp-validation-for="PrecisaAcompanhante" class="field-validation-error"></span>
+
+            <label>Local para Buscar:</label>
+            <select asp-for="LocalBusca" id="localBuscaSelect">
+                @foreach (var local in locaisBusca)
+                {
+                    <option value="@local">@local</option>
+                }
+            </select>
+            <input asp-for="LocalBuscaOutro" id="localBuscaOutro" placeholder="Digite o local" style="display:none; margin-top:10px;" />
+            <span asp-validation-for="LocalBuscaOutro" class="field-validation-error"></span>
+
+            <label>Ponto de Referência:</label>
+            <input asp-for="PontoReferencia" />
+
+            <label>Motivo da Viagem:</label>
+            <input asp-for="MotivoViagem" />
+
+            <label>Observação:</label>
+            <textarea asp-for="Observacao"></textarea>
+
+            <button type="submit">Agendar Transporte</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const localConsultaSelect = document.getElementById('localConsultaSelect');
+        const localConsultaOutro = document.getElementById('localConsultaOutro');
+        localConsultaSelect.addEventListener('change', function () {
+            localConsultaOutro.style.display = this.value === 'Outros' ? 'block' : 'none';
+            if (this.value !== 'Outros') localConsultaOutro.value = '';
+        });
+
+        const localBuscaSelect = document.getElementById('localBuscaSelect');
+        const localBuscaOutro = document.getElementById('localBuscaOutro');
+        localBuscaSelect.addEventListener('change', function () {
+            localBuscaOutro.style.display = this.value === 'Outros' ? 'block' : 'none';
+            if (this.value !== 'Outros') localBuscaOutro.value = '';
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

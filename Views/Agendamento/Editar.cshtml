@@ -1,0 +1,134 @@
+﻿@model AgendamentoTransporte.Models.Agendamento
+@{
+    ViewData["Title"] = "Editar Agendamento";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-editar {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #0d6efd;
+        margin-bottom: 30px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .btn-salvar {
+        display: block;
+        margin: 30px auto 10px;
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        .btn-salvar:hover {
+            background-color: #0b5ed7;
+        }
+
+    .btn-voltar {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+        .btn-voltar a {
+            text-decoration: none;
+            color: #0d6efd;
+        }
+
+            .btn-voltar a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="container-editar">
+    <h2>Editar Agendamento</h2>
+
+    <form asp-action="Editar" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <label asp-for="NomePaciente">Nome do Paciente:</label>
+        <input asp-for="NomePaciente" type="text" required />
+
+        <label asp-for="Telefone">Telefone:</label>
+        <input asp-for="Telefone" type="tel" required />
+
+        <label asp-for="Data">Data da Consulta:</label>
+        <input asp-for="Data" type="date" required />
+
+        <label asp-for="Hora">Hora:</label>
+        <input asp-for="Hora" type="time" required />
+
+        <label asp-for="LocalConsulta">Local da Consulta:</label>
+        <input asp-for="LocalConsulta" type="text" required />
+
+        <label asp-for="LocalConsultaOutro">Local Consulta (Outro):</label>
+        <input asp-for="LocalConsultaOutro" type="text" />
+
+        <label asp-for="PrecisaAcompanhante">Precisa de Acompanhante:</label>
+        <select asp-for="PrecisaAcompanhante">
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+        </select>
+
+        <label asp-for="LocalBusca">Local para Buscar:</label>
+        <input asp-for="LocalBusca" type="text" required />
+
+        <label asp-for="LocalBuscaOutro">Local Busca (Outro):</label>
+        <input asp-for="LocalBuscaOutro" type="text" />
+
+        <label asp-for="PontoReferencia">Ponto de Referência:</label>
+        <input asp-for="PontoReferencia" type="text" />
+
+        <label asp-for="MotivoViagem">Motivo da Viagem:</label>
+        <input asp-for="MotivoViagem" type="text" />
+
+        <label asp-for="Observacao">Observação:</label>
+        <textarea asp-for="Observacao" rows="3"></textarea>
+
+        <label asp-for="UsuarioResponsavel">Agendado por:</label>
+        <input asp-for="UsuarioResponsavel" type="text" readonly />
+
+        <button type="submit" class="btn-salvar">Salvar Alterações</button>
+    </form>
+
+    <div class="btn-voltar">
+        <a href="@Url.Action("Visualizar", "Agendamento")">← Voltar para a Lista</a>
+    </div>
+</div>

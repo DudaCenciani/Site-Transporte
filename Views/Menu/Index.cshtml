@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Menu Principal";
+    var tipo = ViewBag.TipoUsuario as string;
+}
+
+<style>
+    .menu-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .menu-button {
+        width: 80%;
+        max-width: 300px;
+        padding: 15px;
+        font-size: 18px;
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.3s;
+    }
+
+        .menu-button:hover {
+            background-color: #0b5ed7;
+        }
+
+    .sair {
+        margin-top: 40px;
+        font-size: 14px;
+        color: red;
+        text-decoration: none;
+    }
+
+    h2 {
+        text-align: center;
+        color: #0d6efd;
+    }
+</style>
+
+<h2>Menu Principal</h2>
+
+<div class="menu-container">
+    <a href="/Agendamento/Index" class="menu-button">Agendar Transporte</a>
+    <a href="/Agendamento/Visualizar" class="menu-button">Visualizar Agendamentos</a>
+
+
+    <a asp-controller="Agendamento" asp-action="Cancelar" class="btn btn-warning">Cancelar Agendamento</a>
+
+
+    <a href="/Login/Index" class="sair">Sair</a>
+</div>
