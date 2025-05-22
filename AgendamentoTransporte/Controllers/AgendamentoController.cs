@@ -89,9 +89,10 @@ namespace AgendamentoTransporte.Controllers
             ViewBag.TipoUsuario = TempData["TipoUsuario"];
             TempData.Keep(); // mantém o dado para o próximo request
 
-            
 
-            return View(agendamentos.OrderBy(a => a.Data).ThenBy(a => a.Hora).ToList());
+
+            return View(agendamentos.ToList().OrderBy(a => a.Data).ThenBy(a => a.Hora));
+
         }
 
         public IActionResult ExportarExcel()
@@ -148,7 +149,14 @@ namespace AgendamentoTransporte.Controllers
             if (hora.HasValue)
                 agendamentos = agendamentos.Where(a => a.Hora == hora.Value);
 
-            return View(agendamentos.OrderBy(a => a.Data).ThenBy(a => a.Hora).ToList());
+
+            var listaAgendamentos = agendamentos.ToList()
+                                    .OrderBy(a => a.Data)
+                                    .ThenBy(a => a.Hora)
+                                    .ToList();
+
+            return View(listaAgendamentos);
+
         }
         // GET: Agendamento/Editar/5
         public IActionResult Editar(int id)
