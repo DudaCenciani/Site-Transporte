@@ -6,6 +6,26 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<!-- ✅ Garante que a pasta keys (se usada) será copiada -->
+	<ItemGroup>
+		<None Update="keys\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\images\**">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+
+	<!-- ✅ Garante que o banco agendamento.db vai para o deploy -->
+	<ItemGroup>
+		<None Update="agendamento.db">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.105.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
@@ -17,12 +37,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="agendamento.db">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
+		<!-- ✅ Adicionado pacote para persistência do Data Protection no SQLite -->
+		<PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="9.0.5" />
 	</ItemGroup>
 
 </Project>
