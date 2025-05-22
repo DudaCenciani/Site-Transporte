@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AgendamentoTransporte")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4dcc0ba825576a9f03aed3b30da5988437d68d06")]
 [assembly: System.Reflection.AssemblyProductAttribute("AgendamentoTransporte")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AgendamentoTransporte")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

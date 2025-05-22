@@ -28,8 +28,16 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/cenci/Desktop/Site/AgendamentoTransporte/AgendamentoTransporte/Views/Agendamento/Cancelar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cQ2FuY2VsYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cenci/Desktop/Site/AgendamentoTransporte/AgendamentoTransporte/Views/Agendamento/Confirmar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cQ29uZmlybWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cenci/Desktop/Site/AgendamentoTransporte/AgendamentoTransporte/Views/Agendamento/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cRWRpdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cenci/Desktop/Site/AgendamentoTransporte/AgendamentoTransporte/Views/Agendamento/Index.cshtml]

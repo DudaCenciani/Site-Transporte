@@ -81,15 +81,16 @@
 </style>
 
 <div class="login-container">
-    <img src="~/images/logo-2.png" alt="Prefeitura de Pedra Bela" class="logo" />
+    <img src="@Url.Content("~/Images/logo-2.png")" alt="Logo Pedra Bela" style="height: 45px;" />
+
     <div class="login-box">
         <h2>Login</h2>
 
         @if (ViewBag.Erro != null)
         {
-            <div class="erro-msg">
-                @ViewBag.Erro
-            </div>
+        <div class="erro-msg">
+            @ViewBag.Erro
+        </div>
         }
 
         <form asp-action="Index" method="post">

@@ -228,4 +228,4 @@ C:\Users\cenci\Desktop\Site\AgendamentoTransporte\AgendamentoTransporte\obj\Debu
 C:\Users\cenci\Desktop\Site\AgendamentoTransporte\AgendamentoTransporte\obj\Debug\net9.0\AgendamentoTransporte.pdb
 C:\Users\cenci\Desktop\Site\AgendamentoTransporte\AgendamentoTransporte\obj\Debug\net9.0\AgendamentoTransporte.genruntimeconfig.cache
 C:\Users\cenci\Desktop\Site\AgendamentoTransporte\AgendamentoTransporte\obj\Debug\net9.0\ref\AgendamentoTransporte.dll
-C:\Users\cenci\Desktop\Site\AgendamentoTransporte\AgendamentoTransporte\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\cenci\Desktop\Site\AgendamentoTransporte\AgendamentoTransporte\bin\Debug\net9.0\agendamento.db
