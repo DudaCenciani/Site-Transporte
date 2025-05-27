@@ -10,37 +10,36 @@ namespace AgendamentoTransporte.Models
 
 
         [Required(ErrorMessage = "Informe o nome do paciente.")]
-        public string NomePaciente { get; set; }
+        public string NomePaciente { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Informe o telefone.")]
         [Phone]
-        public string Telefone { get; set; }
+        public string Telefone { get; set; } = string.Empty;
 
         [Required]
-        public string LocalConsulta { get; set; }
-        public string? LocalConsultaOutro { get; set; }
-
+        public string LocalConsulta { get; set; } = string.Empty;
+        public string? LocalConsultaOutro { get; set; } = string.Empty;
         [Required]
         [DataType(DataType.Date)]
-        public DateTime Data { get; set; }
+        public DateTime Data { get; set; }  // Não precisa inicializar
 
         [Required]
         [DataType(DataType.Time)]
-        public TimeSpan Hora { get; set; }
+        public TimeSpan Hora { get; set; }  // Também não precisa
 
         [Required]
-        public string PrecisaAcompanhante { get; set; }
+        public string PrecisaAcompanhante { get; set; } = string.Empty;
 
         [Required]
         public string LocalBusca { get; set; }
-        public string? LocalBuscaOutro { get; set; }
+        public string? LocalBuscaOutro { get; set; } = string.Empty;
 
-        public string? PontoReferencia { get; set; }
+        public string? PontoReferencia { get; set; } = string.Empty;
 
-        public string? MotivoViagem { get; set; }
+        public string? MotivoViagem { get; set; } = string.Empty;
 
         public string? Observacao { get; set; }
 
-        public string? UsuarioResponsavel { get; set; }
+        public string? UsuarioResponsavel { get; set; } = string.Empty;
     }
 }

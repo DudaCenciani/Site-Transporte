@@ -1,26 +1,29 @@
 ﻿using AgendamentoTransporte.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
-using AgendamentoTransporte.Data;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ✅ Configuração do banco de dados
 builder.Services.AddDbContext<DataProtectionKeyContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// ✅ Configuração de proteção de dados
 builder.Services.AddDataProtection()
     .PersistKeysToDbContext<DataProtectionKeyContext>();
 
+// ✅ Adiciona serviços MVC
+builder.Services.AddControllersWithViews();
 
+// ✅ Adiciona serviço de autorização
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 app.Urls.Add($"http://*:{port}");
 
-
-// Configure the HTTP request pipeline.
+// ✅ Configuração do pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
